@@ -4,15 +4,14 @@
 var express = require('express');
 var app = express();
 
+
+app.use('/node_modules',express.static('node_modules'));
 // 当客户端请求
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-
-app.get('/',(req,res)=>{
-    // 在调用res render 之前, 需要先指定express的默认模版引擎 和模版页面存储路径
-    res.render('index')
-})
+var indexRouter = require('./router/indexRouter.js');
+app.use(indexRouter)
 
 
 app.listen(3008, function () {
